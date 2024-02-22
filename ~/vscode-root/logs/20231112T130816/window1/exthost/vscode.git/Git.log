@@ -1,0 +1,78 @@
+2023-11-12 13:08:21.727 [info] Log level: Info
+2023-11-12 13:08:21.727 [info] Validating found git in: "git"
+2023-11-12 13:08:21.727 [info] Using git "2.25.1" from "git"
+2023-11-12 13:08:21.727 [info] > git rev-parse --show-toplevel [17ms]
+2023-11-12 13:08:21.727 [info] fatal: detected dubious ownership in repository at '/home/tonny/Desktop/Projects/StudyBud-master'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /home/tonny/Desktop/Projects/StudyBud-master
+2023-11-12 13:08:21.769 [info] > git rev-parse --show-toplevel [31ms]
+2023-11-12 13:08:21.769 [info] fatal: detected dubious ownership in repository at '/home/tonny/Desktop/Projects/StudyBud-master'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /home/tonny/Desktop/Projects/StudyBud-master
+2023-11-12 13:08:21.803 [info] > git rev-parse --show-toplevel [4ms]
+2023-11-12 13:08:21.803 [info] fatal: detected dubious ownership in repository at '/home/tonny/Desktop/Projects/StudyBud-master'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /home/tonny/Desktop/Projects/StudyBud-master
+2023-11-12 13:08:21.867 [info] > git rev-parse --show-toplevel [51ms]
+2023-11-12 13:08:21.867 [info] fatal: detected dubious ownership in repository at '/home/tonny/Desktop/Projects/StudyBud-master'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /home/tonny/Desktop/Projects/StudyBud-master
+2023-11-12 13:08:21.887 [info] > git rev-parse --show-toplevel [3ms]
+2023-11-12 13:08:21.887 [info] fatal: detected dubious ownership in repository at '/home/tonny/Desktop/Projects/StudyBud-master'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /home/tonny/Desktop/Projects/StudyBud-master
+2023-11-12 13:08:21.914 [info] > git rev-parse --show-toplevel [7ms]
+2023-11-12 13:08:21.914 [info] fatal: detected dubious ownership in repository at '/home/tonny/Desktop/Projects/StudyBud-master'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /home/tonny/Desktop/Projects/StudyBud-master
+2023-11-12 13:08:21.932 [info] > git rev-parse --show-toplevel [4ms]
+2023-11-12 13:08:21.932 [info] fatal: detected dubious ownership in repository at '/home/tonny/Desktop/Projects/StudyBud-master'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /home/tonny/Desktop/Projects/StudyBud-master
+2023-11-12 13:08:21.951 [info] > git rev-parse --show-toplevel [7ms]
+2023-11-12 13:08:21.951 [info] fatal: detected dubious ownership in repository at '/home/tonny/Desktop/Projects/StudyBud-master'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /home/tonny/Desktop/Projects/StudyBud-master
+2023-11-12 13:08:21.979 [info] > git rev-parse --show-toplevel [4ms]
+2023-11-12 13:08:21.979 [info] fatal: detected dubious ownership in repository at '/home/tonny/Desktop/Projects/StudyBud-master'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /home/tonny/Desktop/Projects/StudyBud-master
+2023-11-12 13:08:23.424 [info] > git rev-parse --show-toplevel [6ms]
+2023-11-12 13:08:23.424 [info] fatal: detected dubious ownership in repository at '/home/tonny/Desktop/Projects/StudyBud-master'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /home/tonny/Desktop/Projects/StudyBud-master
+2023-11-12 13:08:24.154 [info] > git rev-parse --show-toplevel [8ms]
+2023-11-12 13:08:24.154 [info] fatal: detected dubious ownership in repository at '/home/tonny/Desktop/Projects/StudyBud-master'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /home/tonny/Desktop/Projects/StudyBud-master
+2023-11-12 13:08:24.397 [info] > git rev-parse --show-toplevel [7ms]
+2023-11-12 13:08:24.397 [info] fatal: detected dubious ownership in repository at '/home/tonny/Desktop/Projects/StudyBud-master'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /home/tonny/Desktop/Projects/StudyBud-master
+2023-11-12 13:08:24.638 [info] > git rev-parse --show-toplevel [3ms]
+2023-11-12 13:08:24.638 [info] fatal: detected dubious ownership in repository at '/home/tonny/Desktop/Projects/StudyBud-master'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /home/tonny/Desktop/Projects/StudyBud-master
+2023-11-12 13:08:31.180 [info] > git rev-parse --show-toplevel [4ms]
+2023-11-12 13:08:31.181 [info] fatal: detected dubious ownership in repository at '/home/tonny/Desktop/Projects/StudyBud-master'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /home/tonny/Desktop/Projects/StudyBud-master
+2023-11-12 13:08:56.849 [info] > git rev-parse --show-toplevel [9ms]
+2023-11-12 13:08:56.849 [info] fatal: detected dubious ownership in repository at '/home/tonny/Desktop/Projects/StudyBud-master'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /home/tonny/Desktop/Projects/StudyBud-master

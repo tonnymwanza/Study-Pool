@@ -1,0 +1,6 @@
+2023-11-12 11:36:33.769 [error] browser #1: https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery - error POST Offline
+2023-11-12 11:36:33.797 [error] browser #2: https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery - error POST Offline
+2023-11-12 11:39:36.526 [error] browser #3: https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery - error POST Offline
+2023-11-12 11:39:40.254 [error] browser #1: https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery - error POST Offline
+2023-11-12 11:39:40.300 [error] browser #2: https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery - error POST Offline
+2023-11-12 11:41:18.532 [error] browser #3: https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery - error POST Offline

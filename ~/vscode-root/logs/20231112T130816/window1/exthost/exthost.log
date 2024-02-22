@@ -1,0 +1,12 @@
+2023-11-12 13:08:19.561 [info] Extension host with pid 3671 started
+2023-11-12 13:08:19.561 [info] Skipping acquiring lock for /home/tonny/Desktop/Projects/StudyBud-master/~/vscode-root/User/workspaceStorage/082494b2ab8e4f01a039a063b4e293d1.
+2023-11-12 13:08:20.342 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2023-11-12 13:08:20.789 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2023-11-12 13:08:21.407 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2023-11-12 13:08:21.472 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2023-11-12 13:08:21.655 [info] Eager extensions activated
+2023-11-12 13:08:21.739 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2023-11-12 13:08:21.746 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2023-11-12 13:08:31.302 [info] ExtensionService#_doActivateExtension vscode.html-language-features, startup: false, activationEvent: 'onLanguage:html'
+2023-11-12 13:22:08.864 [info] Extension host terminating: renderer closed the MessagePort
+2023-11-12 13:22:08.955 [info] Extension host with pid 3671 exiting with code 0

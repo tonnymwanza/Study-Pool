@@ -1,0 +1,71 @@
+{% extends 'main.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+{% block content %}
+<main class="profile-page layout layout--3">
+  <div class="container">
+    <!-- Topics Start -->
+    {% include 'base/topics_component.html' %}
+    <!-- Topics End -->
+
+    <!-- Room List Start -->
+    <div class="roomList">
+      <div class="profile">
+        <div class="profil-+e__avatar">
+          <div class="avatar avatar--large active">
+            <img src="{{user.avatar.url}}" />
+          </div>
+        </div>
+        <div class="profile__info">
+          <!-- <h3>{{username}}</h3> -->
+          <p>@{{user.username}}</p>
+          <p>Followers:  <span style="font-weight: 800;">{{all_followers}}</span></p>
+          <p>Following:  <span style="font-weight: 800;">{{all_following}}</span></p>
+          <!-- {% if not request.user == user %} -->
+            {% if request.user in user.follow.follower.all %}
+            <div>
+              <form method="POST" action="{% url 'follow_func' %}">
+                {% csrf_token %} 
+                <input type="hidden" name="username" value="{% if username %} {{username}} {% else %}tonny{% endif %}">
+                <button type="submit">Follow</button>
+              </form>
+            </div>
+            {% else %}
+            <form method="POST" action="{% url 'follow_func' %}">
+              {% csrf_token %}
+              <input type="hidden" name="the_follower">
+              <button type="submit">Unfollow</button>
+            </form>
+            {% endif %}
+          <!-- {% endif %} -->
+          {% if request.user == user %}
+          <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">Edit Profile</a>
+          {% endif %}
+        </div>
+        <div class="profile__about" style="margin-top: 0px;">
+          <h3>About</h3>
+          <p>
+            {{user.bio}}
+          </p>
+        </div>
+      </div>
+
+      <div class="roomList__header">
+        <div>
+          <h2>Study Rooms Hosted by @{{user.username}}</a>
+          </h2>
+        </div>
+      </div>
+      {% include 'base/feed_component.html' %}
+
+
+    </div>
+    <!-- Room List End -->
+
+    <!-- Activities Start -->
+    {% include 'base/activity_component.html' %}
+    <!-- Activities End -->
+  </div>
+</main>
+<script src="{% static 'bootstrap.main.js' %}"></script>
+{% endblock content %}
