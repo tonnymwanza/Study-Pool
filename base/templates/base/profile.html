@@ -24,17 +24,18 @@
           <!-- {% if not request.user == user %} -->
             {% if request.user in user.follow.follower.all %}
             <div>
-              <form method="POST" action="{% url 'follow_func' %}">
+              <form method="POST" action="{% url '' %}">
                 {% csrf_token %} 
                 <input type="hidden" name="username" value="{% if username %} {{username}} {% else %}tonny{% endif %}">
-                <button type="submit">Follow</button>
+                <!-- <input type="hidden" name="follower" value="{{user.username}}"> -->
+                <button type="submit">Unfollow</button>
               </form>
             </div>
             {% else %}
             <form method="POST" action="{% url 'follow_func' %}">
               {% csrf_token %}
-              <input type="hidden" name="the_follower">
-              <button type="submit">Unfollow</button>
+              <input type="hidden" name="username" value="{% if username %} {{username}} {% else %}tonny{% endif %}">
+              <button type="submit">Follow</button>
             </form>
             {% endif %}
           <!-- {% endif %} -->

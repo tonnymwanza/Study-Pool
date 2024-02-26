@@ -95,6 +95,7 @@ def room(request, pk):
                'participants': participants}
     return render(request, 'base/room.html', context)
 
+@login_required(login_url='login')
 def profile(request, pk):
     user = User.objects.get(id=pk)
     rooms = user.room_set.all()
@@ -210,11 +211,11 @@ def footer_page(request):
 
 
 def follow_func(request):
-    if request.method == 'POST':
-        the_follower = request.POST['the_follower']
-        user = request.user
-        follower_ = user.follow.follower.add()
-    return redirect('profile')
+    # if request.method == 'POST':
+        # username = request.POST['username']
+        # user = request.user
+        # follower_ = user.follow.follower.add(request.user)
+    return redirect(f"/u/user.username")
 
 def testing(request):
     return render(request, 'testing.html')
