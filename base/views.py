@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import auth
 from .models import Room, Topic, Message, User
+from django.views import View
 from .forms import RoomForm, UserForm, MyUserCreationForm
 from django.views.generic import TemplateView
 from . models import Follow
@@ -97,15 +98,25 @@ def room(request, pk):
 
 @login_required(login_url='login')
 def profile(request, pk):
+    follow_ = Follow.objects.get(id=pk)
     user = User.objects.get(id=pk)
     rooms = user.room_set.all()
     room_messages = user.message_set.all()
     topics = Topic.objects.all()
     all_followers = user.follow.follower.count()
     all_following = user.follow.following.count()
-    
+
+    # follow = request.POST['follow']
+    # print(follow)
+    if user in follow_.follower.all():
+        follow_.follower.remove(user)
+        follow_.save()
+    else:
+        follow_.follower.add(user)
+        follow_.save()
     context = {
     'user': user,
+    'follow_': follow_,
     'rooms': rooms,
     'room_messages': room_messages,
     'topics': topics,
@@ -210,12 +221,18 @@ def footer_page(request):
     return render(request, 'base/footer_page.html')
 
 
-def follow_func(request):
-    # if request.method == 'POST':
-        # username = request.POST['username']
-        # user = request.user
-        # follower_ = user.follow.follower.add(request.user)
-    return redirect(f"/u/user.username")
-
 def testing(request):
     return render(request, 'testing.html')
+
+
+class FollowView(View):
+
+    def post(self, request):
+        user_to_toggle = request.POST['username']
+        follow_ = Follow.objects.get(user__username__iexact=user_to_toggle)
+        user = request.user
+        if user in follow_.follower.all():
+            follow_.follower.remove(user)
+        else:
+            follow_.follower.add(user)
+        return redirect('home')

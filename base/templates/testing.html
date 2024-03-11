@@ -1,13 +1,54 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
+        <head>
         <title>this is my first web page</title>
     </head>
     <body>
-        <div style="align-items: center;">
-            <a href="https://www.facebook.com">
-                <img src="{% static 'images/avatar.svg' %}" width="250px" height="250px" style="text-align: center;"></a>
+        <div style="align-items: center; margin-left: 130px; margin-top: 100px;">
+            <h3>table one</h3>
+            <table border="1" style="background-color:red;" cellpadding="40px">
+                <tr>
+                    <td style="column-width: 20px;">Row 1 Cell 1</td>
+                    <td>Row 1 Cell 2</td>
+                </tr>
+                <tr>
+                    <td>Row 2 Cell 1</td>
+                    <td>Row 2 Cell 2</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h3>table two</h3>
+            <table border="1" cellpadding="40px">
+                <tr>
+                    <td width="50%">
+                        <ul>
+                            <li>list item 1</li>
+                            <li>list item 2</li>
+                            <li>list item 3</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>list item 4</li>
+                            <li>list item 5</li>
+                            <li>list item 6</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>know how to render html table</p>
+                    </td>
+                    <td>
+                        <a href="https://www.espn.com" target="blank">
+
+                        <img src="{% static 'images/avatar.svg' %}">
+                        </a>
+                    </td>
+                </tr>
+            </table>
         </div>
     </body>
 </html>

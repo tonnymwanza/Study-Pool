@@ -21,24 +21,23 @@
           <p>@{{user.username}}</p>
           <p>Followers:  <span style="font-weight: 800;">{{all_followers}}</span></p>
           <p>Following:  <span style="font-weight: 800;">{{all_following}}</span></p>
-          <!-- {% if not request.user == user %} -->
-            {% if request.user in user.follow.follower.all %}
+          {% if request.user != user %}
+            {% if request.user in follow_.follower.all %}
             <div>
-              <form method="POST" action="{% url '' %}">
+              <form method="POST" action="{% url 'follow_func' %}">
                 {% csrf_token %} 
-                <input type="hidden" name="username" value="{% if username %} {{username}} {% else %}tonny{% endif %}">
-                <!-- <input type="hidden" name="follower" value="{{user.username}}"> -->
+                <input type="hidden" name="username" value="{{user.username}}">
                 <button type="submit">Unfollow</button>
               </form>
             </div>
             {% else %}
             <form method="POST" action="{% url 'follow_func' %}">
               {% csrf_token %}
-              <input type="hidden" name="username" value="{% if username %} {{username}} {% else %}tonny{% endif %}">
+              <input type="hidden" name="username" value="{{user.username}}">
               <button type="submit">Follow</button>
             </form>
             {% endif %}
-          <!-- {% endif %} -->
+          {% endif %}
           {% if request.user == user %}
           <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">Edit Profile</a>
           {% endif %}
