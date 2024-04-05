@@ -74,3 +74,13 @@ def follow_receiver_func(sender, instance, *args, **kwargs):
 
 
     # objects = Mymanager()
+
+
+class Liking(models.Model): 
+    user = models.ManyToManyField(User)
+    like = models.ManyToManyField(User, related_name='user_likes', blank=True)
+    unlike = models.ManyToManyField(User, related_name='user_unlikes', blank=True)
+    room = models.ManyToManyField(Room)
+
+    def __str__(self):
+        return self.user.username
