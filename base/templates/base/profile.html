@@ -22,16 +22,16 @@
           <p>Followers:  <span style="font-weight: 800;">{{all_followers}}</span></p>
           <p>Following:  <span style="font-weight: 800;">{{all_following}}</span></p>
           {% if request.user != user %}
-            {% if request.user in follow_.follower.all %}
+            {% if request.user in follower_.follow.all %}
             <div>
-              <form method="POST" action="{% url 'follow_func' %}">
+              <form method="POST" action="{% url 'profile' %}">
                 {% csrf_token %} 
                 <input type="hidden" name="username" value="{{user.username}}">
                 <button type="submit">Unfollow</button>
               </form>
             </div>
             {% else %}
-            <form method="POST" action="{% url 'follow_func' %}">
+            <form method="POST" action="{% url 'profile' %}">
               {% csrf_token %}
               <input type="hidden" name="username" value="{{user.username}}">
               <button type="submit">Follow</button>

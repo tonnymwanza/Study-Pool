@@ -38,6 +38,7 @@ class Room(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     rules = models.TextField(null=True, blank=True)
+    follow = models.ManyToManyField(User, related_name='follower', null=True, blank=True)
 
     class Meta:
         ordering = ['-updated', '-created']
@@ -60,27 +61,3 @@ class Message(models.Model):
         return self.body[0:50]
 
 
-class Follow(models.Model):  #consider using profile as a model
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, unique=False)
-    follower = models.ManyToManyField(User, blank= True, related_name='my_follower')
-    following = models.ManyToManyField(User, related_name='is_following')
-
-    def __str__(self):
-        return self.user.username
-    
-@receiver(post_save, sender=User)
-def follow_receiver_func(sender, instance, *args, **kwargs):
-    follow = Follow.objects.get_or_create(user=instance)
-
-
-    # objects = Mymanager()
-
-
-class Liking(models.Model): 
-    user = models.ManyToManyField(User)
-    like = models.ManyToManyField(User, related_name='user_likes', blank=True)
-    unlike = models.ManyToManyField(User, related_name='user_unlikes', blank=True)
-    room = models.ManyToManyField(Room)
-
-    def __str__(self):
-        return self.user.username

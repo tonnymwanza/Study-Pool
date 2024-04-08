@@ -11,7 +11,6 @@ from .models import Room, Topic, Message, User
 from django.views import View
 from .forms import RoomForm, UserForm, MyUserCreationForm
 from django.views.generic import TemplateView
-from . models import Follow
 
 # Create your views here.
 
@@ -98,30 +97,23 @@ def room(request, pk):
 
 @login_required(login_url='login')
 def profile(request, pk):
-    follow_ = Follow.objects.get(id=pk)
     user = User.objects.get(id=pk)
     rooms = user.room_set.all()
+    follower_ = Room.objects.get(id=pk)
+    if user in follower_.follow.all():
+        follower_.follow.remove(user)
+        follower_.save
+    else:
+        follower_.follow.add(user)
+        follower_.save()
     room_messages = user.message_set.all()
     topics = Topic.objects.all()
-    all_followers = user.follow.follower.count()
-    all_following = user.follow.following.count()
-
-    # follow = request.POST['follow']
-    # print(follow)
-    if user in follow_.follower.all():
-        follow_.follower.remove(user)
-        follow_.save()
-    else:
-        follow_.follower.add(user)
-        follow_.save()
     context = {
     'user': user,
-    'follow_': follow_,
     'rooms': rooms,
     'room_messages': room_messages,
     'topics': topics,
-    'all_followers': all_followers,
-    'all_following': all_following
+    'follower_': follower_
     }
     return render(request, 'base/profile.html', context)
 
@@ -227,12 +219,12 @@ def testing(request):
 
 class FollowView(View):
 
-    def post(self, request):
-        user_to_toggle = request.POST['username']
-        follow_ = Follow.objects.get(user__username__iexact=user_to_toggle)
+    def post(self, request, pk):
+        room = Room.objects.get(id=pk)
         user = request.user
-        if user in follow_.follower.all():
-            follow_.follower.remove(user)
+        if user in room.follow.all():
+            room.follow.remove(user)
+            room.save()
         else:
-            follow_.follower.add(user)
-        return redirect('home')
+            room.follow.add(user)
+            room.save()
