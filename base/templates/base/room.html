@@ -57,17 +57,34 @@
           <div class="room__info">
             <h3>{{room.name}}</h3>
             <span>{{room.created|timesince}} ago</span>
+            <h4>room followers: <span style="font-weight: bolder;">{{count_followers}}</span>.</h4></span><br>
+            {% if request.user != room.host %}
+              {% if request.user in room.follow.all %}
+              <form method="POST" action="{% url 'follow_func' room.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="username" value="{{user.username}}">
+                <button type="submit">Unfollow</button>
+              </form>
+              {% else %}
+              <form method="POST" action="{% url 'follow_func' room.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="'username" value="{{user.username}}">
+                <button type="submit">Follow</button>
+              </form>
+              {% endif %}
+            {% endif %}
+            </span>
           </div>
           <div class="room__hosted">
             <p>Hosted By</p>
-            <a href="{% url 'user-profile' room.host.id %}" class="room__author">
+            <a href="{% url 'profile' room.host.id %}" class="room__author">
               <div class="avatar avatar--small">
                 <img src="{{room.host.avatar.url}}" />
               </div>
               <span>@{{room.host.username}}</span>
             </a>
           </div>
-          <span class="room__topics">{{room.topic}}</span>
+          <span class="room__topics">{{room.topic}}</span><br>
         </div>
 
         <div class="room__conversation">
@@ -78,7 +95,7 @@
             <div class="thread">
               <div class="thread__top">
                 <div class="thread__author">
-                  <a href="{% url 'user-profile' message.user.id %}" class="thread__authorInfo">
+                  <a href="{% url 'profile' message.user.id %}" class="thread__authorInfo">
                     <div class="avatar avatar--small">
                       <img src="{{message.user.avatar.url}}" />
                     </div>
@@ -125,7 +142,7 @@
       <h3 class="participants__top">Participants <span>({{participants.count}} Joined)</span></h3>
       <div class="participants__list scroll">
         {% for user in participants %}
-        <a href="{%  url 'user-profile' user.id %}" class="participant">
+        <a href="{%  url 'profile' user.id %}" class="participant">
           <div class="avatar avatar--medium">
             <img src="{{user.avatar.url}}" />
           </div>
