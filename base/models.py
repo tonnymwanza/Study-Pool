@@ -38,26 +38,37 @@ class Room(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     rules = models.TextField(null=True, blank=True)
+<<<<<<< HEAD
     follow = models.ManyToManyField(User, related_name='follower', null=True, blank=True)
+=======
+    like = models.ManyToManyField(User, related_name='user_likes', null=True, blank=True)
+    follow = models.ManyToManyField(User, null=True, blank=True, related_name='follower')
+>>>>>>> working-branch
 
     class Meta:
-        ordering = ['-updated', '-created']
+        ordering = ['-created']
 
     def __str__(self):
         return self.name
-
+    
+    def count_likes(self):
+        return self.like.count()
+    
 
 class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    body = models.TextField()
+    body = models.TextField(null=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-updated', '-created']
 
-    def __str__(self):
-        return self.body[0:50]
+    # def __str__(self):
+    #     return self.body[0:50]
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> working-branch

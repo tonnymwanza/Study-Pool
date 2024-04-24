@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
@@ -10,7 +11,12 @@ from django.contrib import auth
 from .models import Room, Topic, Message, User
 from django.views import View
 from .forms import RoomForm, UserForm, MyUserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
+<<<<<<< HEAD
+=======
+from django.views import View
+>>>>>>> working-branch
 
 # Create your views here.
 
@@ -22,7 +28,10 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('home')
+            if 'next' in request.POST:
+                return redirect(request.POST['next'])
+            else:
+                return redirect('home')
         else:
             messages.error(request, "Invalid username or password. Try again!!!")
             return redirect("login")
@@ -79,6 +88,10 @@ def home(request):
 
 def room(request, pk):
     room = Room.objects.get(id=pk)
+    room_likes = room.like.all()
+    current_user = request.user
+    count_followers = room.follow.count()
+    room_follower = room.follow.all()
     room_messages = room.message_set.all()
     participants = room.participants.all()
 
@@ -91,10 +104,11 @@ def room(request, pk):
         room.participants.add(request.user)
         return redirect('room', pk=room.id)
 
-    context = {'room': room, 'room_messages': room_messages,
-               'participants': participants}
+    context = {'room': room, 'room_messages': room_messages,'room_likes': room_likes,
+               'participants': participants, 'count_followers': count_followers}
     return render(request, 'base/room.html', context)
 
+<<<<<<< HEAD
 @login_required(login_url='login')
 def profile(request, pk):
     user = User.objects.get(id=pk)
@@ -116,6 +130,37 @@ def profile(request, pk):
     'follower_': follower_
     }
     return render(request, 'base/profile.html', context)
+=======
+
+class ProfileView(LoginRequiredMixin, View):
+    login_url = 'login'
+    def get(self, request, pk):
+        user = User.objects.get(id=pk)
+        rooms = user.room_set.all()
+        room_messages = user.message_set.all()
+        topics = Topic.objects.all()
+        context = {
+            'user': user,
+            'rooms': rooms,
+            'room_messages': room_messages,
+            'topics': topics,
+        }
+        return render(request, 'base/profile.html', context)
+    
+    def post(self, request, pk):
+        user = User.objects.get(id=pk)
+        current_user = request.user
+        rooms = user.room_set.all()
+        room_messages = user.message_set.all()
+        topics = Topic.objects.all()
+        context = {
+            'user': user,
+            'rooms': rooms,
+            'room_messages': room_messages,
+            'topics': topics,
+        }
+        return render(request, 'base/profile.html', context)
+>>>>>>> working-branch
 
 @login_required(login_url='login')
 def createRoom(request):
@@ -213,6 +258,28 @@ def footer_page(request):
     return render(request, 'base/footer_page.html')
 
 
+<<<<<<< HEAD
+=======
+def follow_func(request, pk):
+    room = Room.objects.get(id=pk)
+    current_user = request.user
+    count_followers = room.follow.count()
+    room_follower = room.follow.all()
+    if current_user in room.follow.all():
+        room.follow.remove(current_user)
+        room.save()
+    else:
+        room.follow.add(current_user)
+        room.save()
+
+    context = {
+        'room': room,
+        'count_followers': count_followers,
+        'room_follower': room_follower
+    }
+    return redirect('home')
+
+>>>>>>> working-branch
 def testing(request):
     return render(request, 'testing.html')
 

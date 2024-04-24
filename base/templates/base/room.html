@@ -58,6 +58,23 @@
           <div class="room__info">
             <h3>{{room.name}}</h3>
             <span>{{room.created|timesince}} ago</span>
+            <h4>room followers: <span style="font-weight: bolder;">{{count_followers}}</span>.</h4></span><br>
+            {% if request.user != room.host %}
+              {% if request.user in room.follow.all %}
+              <form method="POST" action="{% url 'follow_func' room.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="username" value="{{user.username}}">
+                <button type="submit">Unfollow</button>
+              </form>
+              {% else %}
+              <form method="POST" action="{% url 'follow_func' room.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="'username" value="{{user.username}}">
+                <button type="submit">Follow</button>
+              </form>
+              {% endif %}
+            {% endif %}
+            </span>
           </div>
           <div class="room__hosted">
             <p>Hosted By</p>
@@ -68,7 +85,7 @@
               <span>@{{room.host.username}}</span>
             </a>
           </div>
-          <span class="room__topics">{{room.topic}}</span>
+          <span class="room__topics">{{room.topic}}</span><br>
         </div>
 
         <div class="room__conversation">

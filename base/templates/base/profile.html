@@ -19,6 +19,7 @@
         <div class="profile__info">
           <!-- <h3>{{username}}</h3> -->
           <p>@{{user.username}}</p>
+<<<<<<< HEAD
           <p>Followers:  <span style="font-weight: 800;">{{all_followers}}</span></p>
           <p>Following:  <span style="font-weight: 800;">{{all_following}}</span></p>
           {% if request.user != user %}
@@ -32,6 +33,19 @@
             </div>
             {% else %}
             <form method="POST" action="{% url 'profile' %}">
+=======
+          <p>Followers:  <span style="font-weight: 800;">{{follower_}}</span></p>
+          <p>Following:  <span style="font-weight: 800;">{{following_}}</span></p>
+          {% if not request.user == user %}
+            {% if request.user in user_room.follower.all %}
+            <form method="POST" action="">
+              {% csrf_token %} 
+              <input type="hidden" name="username" value="{{user.username}}">
+              <button type="submit">Unfollow</button>
+            </form>
+            {% else %}
+            <form method="POST" action="">
+>>>>>>> working-branch
               {% csrf_token %}
               <input type="hidden" name="username" value="{{user.username}}">
               <button type="submit">Follow</button>
