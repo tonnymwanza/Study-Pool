@@ -13,10 +13,7 @@ from django.views import View
 from .forms import RoomForm, UserForm, MyUserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
-<<<<<<< HEAD
-=======
 from django.views import View
->>>>>>> working-branch
 
 # Create your views here.
 
@@ -108,7 +105,6 @@ def room(request, pk):
                'participants': participants, 'count_followers': count_followers}
     return render(request, 'base/room.html', context)
 
-<<<<<<< HEAD
 @login_required(login_url='login')
 def profile(request, pk):
     user = User.objects.get(id=pk)
@@ -130,7 +126,6 @@ def profile(request, pk):
     'follower_': follower_
     }
     return render(request, 'base/profile.html', context)
-=======
 
 class ProfileView(LoginRequiredMixin, View):
     login_url = 'login'
@@ -160,7 +155,6 @@ class ProfileView(LoginRequiredMixin, View):
             'topics': topics,
         }
         return render(request, 'base/profile.html', context)
->>>>>>> working-branch
 
 @login_required(login_url='login')
 def createRoom(request):
@@ -257,9 +251,6 @@ def activityPage(request):
 def footer_page(request):
     return render(request, 'base/footer_page.html')
 
-
-<<<<<<< HEAD
-=======
 def follow_func(request, pk):
     room = Room.objects.get(id=pk)
     current_user = request.user
@@ -279,7 +270,6 @@ def follow_func(request, pk):
     }
     return redirect('home')
 
->>>>>>> working-branch
 def testing(request):
     return render(request, 'testing.html')
 
