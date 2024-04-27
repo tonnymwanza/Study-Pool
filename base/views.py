@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
@@ -247,7 +248,8 @@ def follow_func(request, pk):
         'count_followers': count_followers,
         'room_follower': room_follower
     }
-    return redirect('home')
+    print(request.path)
+    return redirect('room', pk=pk)
 
 def testing(request):
     return render(request, 'testing.html')
