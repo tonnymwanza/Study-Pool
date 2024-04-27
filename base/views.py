@@ -86,7 +86,7 @@ def home(request):
 
 def room(request, pk):
     room = Room.objects.get(id=pk)
-    room_likes = room.like.all()
+    total_likes = room.like.count()
     current_user = request.user
     count_followers = room.follow.count()
     room_follower = room.follow.all()
@@ -102,7 +102,7 @@ def room(request, pk):
         room.participants.add(request.user)
         return redirect('room', pk=room.id)
 
-    context = {'room': room, 'room_messages': room_messages,'room_likes': room_likes,
+    context = {'room': room, 'room_messages': room_messages,'total_likes': total_likes,
                'participants': participants, 'count_followers': count_followers}
     return render(request, 'base/room.html', context)
 
@@ -269,12 +269,12 @@ def follow_func(request, pk):
         'count_followers': count_followers,
         'room_follower': room_follower
     }
-    print(request.path)
     return redirect('room', pk=pk)
 
 def testing(request):
     return render(request, 'testing.html')
 
+<<<<<<< HEAD
 
 class FollowView(View):
 
@@ -287,3 +287,19 @@ class FollowView(View):
         else:
             room.follow.add(user)
             room.save()
+=======
+def user_likes(request, pk):
+    room = Room.objects.get(id=pk)
+    current_user = request.user
+    
+    if current_user in room.like.all():
+        room.like.remove(current_user)
+        room.save()
+    else:
+        room.like.add(current_user)
+        room.save()
+    context = {
+        'room': room,
+    }
+    return redirect('room', pk=pk)
+>>>>>>> working-branch
