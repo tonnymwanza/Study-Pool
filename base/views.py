@@ -274,8 +274,6 @@ def follow_func(request, pk):
 def testing(request):
     return render(request, 'testing.html')
 
-<<<<<<< HEAD
-
 class FollowView(View):
 
     def post(self, request, pk):
@@ -287,7 +285,6 @@ class FollowView(View):
         else:
             room.follow.add(user)
             room.save()
-=======
 def user_likes(request, pk):
     room = Room.objects.get(id=pk)
     current_user = request.user
@@ -302,4 +299,3 @@ def user_likes(request, pk):
         'room': room,
     }
     return redirect('room', pk=pk)
->>>>>>> working-branch
