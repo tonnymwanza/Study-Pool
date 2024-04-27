@@ -72,6 +72,16 @@
                 <button type="submit">Follow</button>
               </form>
               {% endif %}
+              <span>{{total_likes}} Likes</span>{% if request.user in room.like.all %}<form method="POST" action="{% url 'user_likes' room.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="username" value="{{user.username}}">
+                <button type="submit">Unlike</button>
+              </form>{% else %}
+              <form method="POST" action="{% url 'user_likes' room.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="username" value="user.username">
+                <button type="submit">Like</button>
+              </form>{% endif %}
             {% endif %}
             </span>
           </div>
