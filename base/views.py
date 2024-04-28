@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -252,6 +253,10 @@ def activityPage(request):
 def footer_page(request):
     return render(request, 'base/footer_page.html')
 
+<<<<<<< HEAD
+=======
+@login_required(login_url='login')
+>>>>>>> working-branch
 def follow_func(request, pk):
     room = Room.objects.get(id=pk)
     current_user = request.user
@@ -274,6 +279,7 @@ def follow_func(request, pk):
 def testing(request):
     return render(request, 'testing.html')
 
+<<<<<<< HEAD
 class FollowView(View):
 
     def post(self, request, pk):
@@ -285,6 +291,9 @@ class FollowView(View):
         else:
             room.follow.add(user)
             room.save()
+=======
+@login_required(login_url='login')
+>>>>>>> working-branch
 def user_likes(request, pk):
     room = Room.objects.get(id=pk)
     current_user = request.user
