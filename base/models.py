@@ -38,6 +38,7 @@ class Room(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     rules = models.TextField(null=True, blank=True)
+    like = models.ManyToManyField(User, related_name='user_likes', null=True)
     follow = models.ManyToManyField(User, null=True, blank=True, related_name='follower')
 
     class Meta:

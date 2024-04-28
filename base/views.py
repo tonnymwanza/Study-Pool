@@ -253,10 +253,7 @@ def activityPage(request):
 def footer_page(request):
     return render(request, 'base/footer_page.html')
 
-<<<<<<< HEAD
-=======
 @login_required(login_url='login')
->>>>>>> working-branch
 def follow_func(request, pk):
     room = Room.objects.get(id=pk)
     current_user = request.user
@@ -279,21 +276,7 @@ def follow_func(request, pk):
 def testing(request):
     return render(request, 'testing.html')
 
-<<<<<<< HEAD
-class FollowView(View):
-
-    def post(self, request, pk):
-        room = Room.objects.get(id=pk)
-        user = request.user
-        if user in room.follow.all():
-            room.follow.remove(user)
-            room.save()
-        else:
-            room.follow.add(user)
-            room.save()
-=======
 @login_required(login_url='login')
->>>>>>> working-branch
 def user_likes(request, pk):
     room = Room.objects.get(id=pk)
     current_user = request.user
