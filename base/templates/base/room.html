@@ -64,24 +64,24 @@
               <form method="POST" action="{% url 'follow_func' room.id %}">
                 {% csrf_token %}
                 <input type="hidden" name="username" value="{{user.username}}">
-                <button type="submit">Unfollow</button>
+                <button type="submit" class="Btn-btn-info">Unfollow room</button>
               </form>
               {% else %}
               <form method="POST" action="{% url 'follow_func' room.id %}">
                 {% csrf_token %}
                 <input type="hidden" name="'username" value="{{user.username}}">
-                <button type="submit">Follow</button>
+                <button type="submit" class="Btn btn-info">Follow room</button>
               </form>
               {% endif %}
               <span>{{total_likes}} Likes</span>{% if request.user in room.like.all %}<form method="POST" action="{% url 'user_likes' room.id %}">
                 {% csrf_token %}
                 <input type="hidden" name="username" value="{{user.username}}">
-                <button type="submit">Unlike</button>
+                <button type="submit" class="Btn btn-info">Unlike room</button>
               </form>{% else %}
               <form method="POST" action="{% url 'user_likes' room.id %}">
                 {% csrf_token %}
                 <input type="hidden" name="username" value="user.username">
-                <button type="submit">Like</button>
+                <button type="submit" class="Btn-btn-info">Like room</button>
               </form>{% endif %}
             {% endif %}
             </span>
@@ -137,14 +137,15 @@
         </div>
 
       </div>
+      {% if request.user.is_authenticated %}
       <div class="room__message">
         <form action="" method="POST">
           {% csrf_token %}
           <input name="body" placeholder="Write your message here...and press Enter to send." />
-          <!-- <span style="align-items: left;"><button class="btn" type="submit">Send</button></span> -->
-          <input type="image" src="{% static 'images/send.png' %}" alt="submit" width="10px" height="20px"> 
+          <!-- <span style="align-items: left;"><button class="btn" type="submit">Send</button></span> --> 
         </form>
       </div>
+      {% endif %}
     </div>
     <!-- Room End -->
 
