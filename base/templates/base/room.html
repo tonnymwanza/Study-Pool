@@ -64,7 +64,7 @@
               <form method="POST" action="{% url 'follow_func' room.id %}">
                 {% csrf_token %}
                 <input type="hidden" name="username" value="{{user.username}}">
-                <button type="submit" class="Btn-btn-info">Unfollow room</button>
+                <button type="submit" class="Btn btn-info">Unfollow room</button>
               </form>
               {% else %}
               <form method="POST" action="{% url 'follow_func' room.id %}">
@@ -81,7 +81,7 @@
               <form method="POST" action="{% url 'user_likes' room.id %}">
                 {% csrf_token %}
                 <input type="hidden" name="username" value="user.username">
-                <button type="submit" class="Btn-btn-info">Like room</button>
+                <button type="submit" class="Btn btn-info">Like room</button>
               </form>{% endif %}
             {% endif %}
             </span>
