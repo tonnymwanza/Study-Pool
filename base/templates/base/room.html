@@ -59,6 +59,7 @@
             <h3>{{room.name}}</h3>
             <span>{{room.created|timesince}} ago</span>
             <h4>room followers: <span style="font-weight: bolder;">{{count_followers}}</span>.</h4></span><br>
+            <h4>room likes: <span style="font-weight: bolder;">{{total_likes}}</span>.</h4></span><br>
             {% if request.user != room.host %}
               {% if request.user in room.follow.all %}
               <form method="POST" action="{% url 'follow_func' room.id %}">
@@ -141,8 +142,8 @@
       <div class="room__message">
         <form action="" method="POST">
           {% csrf_token %}
-          <input name="body" placeholder="Write your message here...and press Enter to send." />
-          <!-- <span style="align-items: left;"><button class="btn" type="submit">Send</button></span> --> 
+          <input name="body" placeholder="Write your message here...." />
+          <span style="align-items: left;"><button style="border-radius: 30px; margin-top:10px;" class="Btn btn-primary btn-lg" type="submit">Send message</button></span> 
         </form>
       </div>
       {% endif %}
