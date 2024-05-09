@@ -38,10 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-
-    'base.apps.BaseConfig',
     'rest_framework',
+    'dj_rest_auth',
+    'allauth',    
     "corsheaders",
+    'rest_framework.authtoken',
+
+    # local applications
+    'APIs',
+    'base.apps.BaseConfig',
 ]
 
 AUTH_USER_MODEL = 'base.User'
@@ -151,3 +156,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+        ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication", # new
+        ],
+}
+
+SITE_ID = 1

@@ -65,24 +65,24 @@
               <form method="POST" action="{% url 'follow_func' room.id %}">
                 {% csrf_token %}
                 <input type="hidden" name="username" value="{{user.username}}">
-                <button type="submit" class="Btn btn-info">Unfollow room</button>
+                <button style="border-radius:12px" type="submit" class="Btn btn-info">Unfollow room</button>
               </form>
               {% else %}
               <form method="POST" action="{% url 'follow_func' room.id %}">
                 {% csrf_token %}
                 <input type="hidden" name="'username" value="{{user.username}}">
-                <button type="submit" class="Btn btn-info">Follow room</button>
+                <button style="border-radius: 12px;" type="submit" class="Btn btn-info">Follow room</button>
               </form>
               {% endif %}
               <span>{{total_likes}} Likes</span>{% if request.user in room.like.all %}<form method="POST" action="{% url 'user_likes' room.id %}">
                 {% csrf_token %}
                 <input type="hidden" name="username" value="{{user.username}}">
-                <button type="submit" class="Btn btn-info">Unlike room</button>
+                <button style="border-radius: 12px;" type="submit" class="Btn btn-info">Unlike room</button>
               </form>{% else %}
               <form method="POST" action="{% url 'user_likes' room.id %}">
                 {% csrf_token %}
                 <input type="hidden" name="username" value="user.username">
-                <button type="submit" class="Btn btn-info">Like room</button>
+                <button style="border-radius: 12px;" type="submit" class="Btn btn-info">Like room</button>
               </form>{% endif %}
             {% endif %}
             </span>
