@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'allauth',    
     "corsheaders",
     'rest_framework.authtoken',
+    'drf_spectacular',
 
     # local applications
     'APIs',
@@ -166,6 +167,13 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication", # new
         ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Blog API Project",
+    "DESCRIPTION": "A sample blog to learn about DRF",
+    "VERSION": "1.0.0",
 }
 
 SITE_ID = 1
