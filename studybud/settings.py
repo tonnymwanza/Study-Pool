@@ -40,12 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'rest_framework',
     'dj_rest_auth',
-    'allauth',    
     "corsheaders",
     'rest_framework.authtoken',
     'drf_spectacular',
+    'allauth',    
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     
 
     # local applications
@@ -55,7 +56,6 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'base.User'
 
-ACCOUNT_EMAIL_VERIFICATION = "none"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -182,3 +182,8 @@ SPECTACULAR_SETTINGS = {
 }
 
 SITE_ID = 1
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
+AUTHENTICATION_BACKENDS = (
+    'allauth.account.auth_backends.AuthenticationBackend',
+)

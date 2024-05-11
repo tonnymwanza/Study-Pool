@@ -18,6 +18,7 @@ urlpatterns = [
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
     path('schema/swagger/', SpectacularSwaggerView.as_view(), name='swagger'),
     path('schema/redoc', SpectacularRedocView.as_view(), name='redoc'),
+    path('', include('allauth.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
