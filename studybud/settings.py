@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     "corsheaders",
     'rest_framework.authtoken',
     'drf_spectacular',
+    'allauth.account',
+    'allauth.socialaccount',
+    
 
     # local applications
     'APIs',
@@ -51,6 +54,8 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'base.User'
+
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

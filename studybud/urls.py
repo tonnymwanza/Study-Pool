@@ -5,6 +5,9 @@ from django.conf.urls.static import static
 from drf_spectacular.views import SpectacularAPIView
 from drf_spectacular.views import SpectacularSwaggerView
 from drf_spectacular.views import SpectacularRedocView
+
+# my url patterns
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('base.urls')),
