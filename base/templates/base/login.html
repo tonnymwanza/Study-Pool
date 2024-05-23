@@ -71,7 +71,10 @@
           {% if request.GET.next %}
           <input type="hidden" name="next" value="{{request.GET.next}}">
           {% endif %}
-          <button class="btn btn--main" type="submit">
+          {% for message in messages %}
+          <span style="color: red; font-size: larger;">{{message}}</span><br>
+          {% endfor %}
+          <button class="btn btn--main btn-lg" type="submit">
             <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
               <title>lock</title>
               <path
