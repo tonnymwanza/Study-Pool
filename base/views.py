@@ -103,17 +103,25 @@ def room(request, pk):
     room_messages = room.message_set.all()
     participants = room.participants.all()
 
+    is_member = room.participants.filter(id=current_user.id).exists()
+
     if request.method == 'POST':
-        message = Message.objects.create(
-            user=request.user,
-            room=room,
-            body=request.POST.get('body')
-        )
-        room.participants.add(request.user)
-        return redirect('room', pk=room.id)
+        if 'join' in request.POST:  # Logic for joining the room
+            room.participants.add(current_user)
+            return redirect('room', pk=room.id)
+        elif 'message' in request.POST:  # Logic for sending a message
+            if is_member:  # Only allow members to send messages
+                Message.objects.create(
+                    user=current_user,
+                    room=room,
+                    body=request.POST.get('body')
+                )
+                return redirect('room', pk=room.id)
+            else:
+                return redirect('room', pk=room.id)
 
     context = {'room': room, 'room_messages': room_messages,'total_likes': total_likes,
-               'participants': participants, 'count_followers': count_followers}
+               'participants': participants, 'count_followers': count_followers, 'is_member': is_member}
     return render(request, 'base/room.html', context)
 
 #the profile view, class based
