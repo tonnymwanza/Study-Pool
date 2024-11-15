@@ -16,8 +16,11 @@ from .forms import RoomForm, UserForm, MyUserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 from django.views import View
+from . models import Room
 
 # Create your views here.
+
+#the login login view
 
 def login(request):
     if request.method == "POST":
@@ -36,11 +39,13 @@ def login(request):
             return redirect("login")
     return render(request, 'base/login.html')
 
+#the logout view
 
 def logoutUser(request):
     logout(request)
     return redirect('home')
 
+#user registration view
 
 def register(request):
     if request.method == "POST":
@@ -64,6 +69,8 @@ def register(request):
             return redirect('register')
     return render(request, 'base/register.html')
 
+#the view to render the homepage
+
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
@@ -84,7 +91,9 @@ def home(request):
                "all_rooms": all_rooms}
     return render(request, 'base/home.html', context)
 
+#the room view to display room  content
 
+@login_required(login_url='login')
 def room(request, pk):
     room = Room.objects.get(id=pk)
     total_likes = room.like.count()
@@ -107,32 +116,15 @@ def room(request, pk):
                'participants': participants, 'count_followers': count_followers}
     return render(request, 'base/room.html', context)
 
-@login_required(login_url='login')
-def profile(request, pk):
-    user = User.objects.get(id=pk)
-    rooms = user.room_set.all()
-    follower_ = Room.objects.get(id=pk)
-    if user in follower_.follow.all():
-        follower_.follow.remove(user)
-        follower_.save
-    else:
-        follower_.follow.add(user)
-        follower_.save()
-    room_messages = user.message_set.all()
-    topics = Topic.objects.all()
-    context = {
-    'user': user,
-    'rooms': rooms,
-    'room_messages': room_messages,
-    'topics': topics,
-    'follower_': follower_
-    }
-    return render(request, 'base/profile.html', context)
+#the profile view, class based
 
 class ProfileView(LoginRequiredMixin, View):
     login_url = 'login'
     def get(self, request, pk):
+        room_ = Room.objects.get(id=pk)
+        room_host = room_.host
         user = User.objects.get(id=pk)
+        total_user_followers = user.follower.count()
         rooms = user.room_set.all()
         room_messages = user.message_set.all()
         topics = Topic.objects.all()
@@ -141,12 +133,20 @@ class ProfileView(LoginRequiredMixin, View):
             'rooms': rooms,
             'room_messages': room_messages,
             'topics': topics,
+            'total_user_followers': total_user_followers,
+            'room': room
         }
         return render(request, 'base/profile.html', context)
     
     def post(self, request, pk):
         user = User.objects.get(id=pk)
+        room = Room.objects.get(id=pk)
         current_user = request.user
+        if current_user in room.host.follower.all():
+            room.host.follower.remove(current_user)
+        else:
+            room.host.follower.add(current_user)
+            room.save()
         rooms = user.room_set.all()
         room_messages = user.message_set.all()
         topics = Topic.objects.all()
@@ -155,8 +155,11 @@ class ProfileView(LoginRequiredMixin, View):
             'rooms': rooms,
             'room_messages': room_messages,
             'topics': topics,
+            'room': room
         }
         return render(request, 'base/profile.html', context)
+
+#the view to create a room
 
 @login_required(login_url='login')
 def createRoom(request):
@@ -178,6 +181,7 @@ def createRoom(request):
     context = {'form': form, 'topics': topics}
     return render(request, 'base/room_form.html', context)
 
+#the view to update a room
 
 @login_required(login_url='login')
 def updateRoom(request, pk):
@@ -199,6 +203,7 @@ def updateRoom(request, pk):
     context = {'form': form, 'topics': topics, 'room': room}
     return render(request, 'base/room_form.html', context)
 
+#the view to delete a room
 
 @login_required(login_url='login')
 def deleteRoom(request, pk):
@@ -212,19 +217,21 @@ def deleteRoom(request, pk):
         return redirect('home')
     return render(request, 'base/delete_room.html', {'obj': room})
 
+#the view of deleting room messages
 
 @login_required(login_url='login')
 def deleteMessage(request, pk):
-    message = Message.objects.get(id=pk)
+    message = Message.objects.get(id=pk)                                               
 
     if request.user != message.user:
         return HttpResponse('You cant delete the message!!')
 
     if request.method == 'POST':
         message.delete()
-        return redirect('home')
+        return redirect('room', pk=pk)
     return render(request, 'base/delete.html', {'obj': message})
 
+#the view of updating user profile
 
 @login_required(login_url='login')
 def updateUser(request):
@@ -235,9 +242,11 @@ def updateUser(request):
         form = UserForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('user-profile', pk=user.id)
+            return redirect('profile', pk=user.id)
 
     return render(request, 'base/update-user.html', {'form': form})
+
+#the view to render topics
 
 @login_required(login_url='login')
 def topicsPage(request):
@@ -252,6 +261,8 @@ def activityPage(request):
 
 def footer_page(request):
     return render(request, 'base/footer_page.html')
+
+#the view following or unfollowing rooms
 
 @login_required(login_url='login')
 def follow_func(request, pk):
@@ -273,8 +284,27 @@ def follow_func(request, pk):
     }
     return redirect('room', pk=pk)
 
-def testing(request):
-    return render(request, 'testing.html')
+# the view to follow or unfollow users
+
+def follow_user_view(request, pk):
+    room = Room.objects.get(id=pk)
+    user = User.objects.get(id=pk)
+    current_user = request.user
+    total_user_followers = room.host.follower.count()
+    print(total_user_followers)
+    if current_user in room.host.follower.all():
+        room.host.follower.remove(current_user)
+    else:
+        room.host.follower.add(current_user)
+        room.save()
+    context = {
+        'total_user_followers': total_user_followers,
+        'user': user,
+        'room': room
+    }
+    return redirect('profile', pk=pk)
+
+#the view to like or dislike users
 
 @login_required(login_url='login')
 def user_likes(request, pk):
@@ -290,4 +320,6 @@ def user_likes(request, pk):
     context = {
         'room': room,
     }
-    return redirect('room', pk=pk)
+    return redirect('room', pk=pk) 
+
+

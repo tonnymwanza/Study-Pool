@@ -15,7 +15,6 @@ class User(AbstractUser):
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
-
     #the user custom manager
     
     objects = Mymanager()
@@ -40,6 +39,7 @@ class Room(models.Model):
     rules = models.TextField(null=True, blank=True)
     like = models.ManyToManyField(User, related_name='user_likes', null=True)
     follow = models.ManyToManyField(User, null=True, blank=True, related_name='follower')
+    member = models.BooleanField(default=False, null=True)
 
     class Meta:
         ordering = ['-created']
@@ -63,3 +63,4 @@ class Message(models.Model):
 
     def __str__(self):
         return self.body[0:50]
+

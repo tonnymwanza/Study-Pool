@@ -74,7 +74,7 @@
                 <button style="border-radius: 12px;" type="submit" class="Btn btn-info">Follow room</button>
               </form>
               {% endif %}
-              <span>{{total_likes}} Likes</span>{% if request.user in room.like.all %}<form method="POST" action="{% url 'user_likes' room.id %}">
+              <span></span>{% if request.user in room.like.all %}<form method="POST" action="{% url 'user_likes' room.id %}">
                 {% csrf_token %}
                 <input type="hidden" name="username" value="{{user.username}}">
                 <button style="border-radius: 12px;" type="submit" class="Btn btn-info">Unlike room</button>
@@ -96,13 +96,10 @@
               <span>@{{room.host.username}}</span>
             </a>
           </div>
-          <span class="room__topics">{{room.topic}}</span><br>
+          <span class="room__topics">{{room.topic}}</span>
         </div>
-
         <div class="room__conversation">
           <div class="threads scroll">
-
-
             {% for message in room_messages %}
             <div class="thread">
               <div class="thread__top">
@@ -160,7 +157,6 @@
             <img src="{{user.avatar.url}}" />
           </div>
           <p>
-            {{user.name}}
             <span>@{{user.username}}</span>
           </p>
         </a>
